@@ -12,15 +12,15 @@ import '../models/post_model.dart';
 typedef Future<Unit> DeleteOrUpdateOrAddPost();
 
 class PostsRepositoryImpl implements PostsRepository {
-  //الكلاس ده معمولو حقن بالتلاتة فاينالز اللي تحت دول ومعتمد عليهم عشان يقوم بعملو
   final PostRemoteDataSource remoteDataSource;
   final PostLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
-  PostsRepositoryImpl(
-      {required this.remoteDataSource,
-      required this.localDataSource,
-      required this.networkInfo});
+  PostsRepositoryImpl({
+    required this.remoteDataSource,
+    required this.localDataSource,
+    required this.networkInfo,
+  });
   @override
   Future<Either<Failure, List<Post>>> getAllPosts() async {
     if (await networkInfo.isConnected) {
@@ -59,8 +59,11 @@ class PostsRepositoryImpl implements PostsRepository {
 
   @override
   Future<Either<Failure, Unit>> updatePost(Post post) async {
-    final PostModel postModel =
-        PostModel(id: post.id, title: post.title, body: post.body);
+    final PostModel postModel = PostModel(
+      id: post.id,
+      title: post.title,
+      body: post.body,
+    );
 
     return await _getMessage(() {
       return remoteDataSource.updatePost(postModel);
@@ -68,7 +71,8 @@ class PostsRepositoryImpl implements PostsRepository {
   }
 
   Future<Either<Failure, Unit>> _getMessage(
-      DeleteOrUpdateOrAddPost deleteOrUpdateOrAddPost) async {
+    DeleteOrUpdateOrAddPost deleteOrUpdateOrAddPost,
+  ) async {
     if (await networkInfo.isConnected) {
       try {
         await deleteOrUpdateOrAddPost();
