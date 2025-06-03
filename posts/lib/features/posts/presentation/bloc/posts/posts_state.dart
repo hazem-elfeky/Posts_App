@@ -9,10 +9,10 @@ abstract class PostsState extends Equatable {
 
 class PostsInitial extends PostsState {}
 
-class LoadingPostsState extends PostsState {} //ستيت الودينج
+class LoadingPostsState extends PostsState {} 
 
 class LoadedPostsState extends PostsState {
-  //ستيت لما يرجعولي كل البوستات
+  
   final List<Post> posts;
 
   LoadedPostsState({required this.posts});
@@ -22,7 +22,7 @@ class LoadedPostsState extends PostsState {
 }
 
 class ErrorPostsState extends PostsState {
-  //تالت ستيت بتاع الايرور
+  
   final String message;
 
   ErrorPostsState({required this.message});
