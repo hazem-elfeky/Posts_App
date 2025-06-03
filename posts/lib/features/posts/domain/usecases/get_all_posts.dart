@@ -5,9 +5,9 @@ import '../../../../core/error/failures.dart';
 import '../entities/post.dart';
 
 class GetAllPostsUsecase {
-  //اليوس كيسيس هي منطق التطبيق
+  
   final PostsRepository
-      repository; //متغير من نوع بوست ريبوستريس وهو اوبجيكت من نوع انترفيس
+      repository; 
 
   GetAllPostsUsecase(this.repository);
 
